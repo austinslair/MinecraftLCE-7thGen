@@ -2,8 +2,9 @@ package com.austinslair.minecraftlce;
 
 public final class NativeBridge {
     static {
-        System.loadLibrary("minecraftlce");
+        System.loadLibrary("minecraft_android");
     }
+
     private NativeBridge() {}
 
     public static native void touch(int action, int pointerId, float x, float y);
