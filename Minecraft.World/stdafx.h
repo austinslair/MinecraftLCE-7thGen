@@ -13,8 +13,8 @@
 #include <vector>
 #include <string>
 #include <memory>
-#include "../Minecraft.Client/AndroidTypes.h"
-#include "../Minecraft.Client/AndroidMaths.h"
+#include "AndroidTypes.h"
+#include "AndroidMaths.h"
 #endif
 
 #ifdef __PS3__
