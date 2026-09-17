@@ -21,12 +21,25 @@ jobs:
 
       - name: Setup Android NDK
         uses: nttld/setup-ndk@v1
+        id: setup-ndk
         with:
           ndk-version: r26b
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.5'
+
       - name: Build Debug APK
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
         run: |
           cd android
+          # If the repository author forgot to commit gradlew, generate it
+          if [ ! -f "gradlew" ]; then
+            echo "gradlew wrapper not found in repo, creating one..."
+            gradle wrapper
+          fi
           chmod +x gradlew
           ./gradlew assembleDebug --stacktrace
 
@@ -34,4 +47,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: android/**/build/outputs/apk/**/*.apk
+          if-no-files-found: error
