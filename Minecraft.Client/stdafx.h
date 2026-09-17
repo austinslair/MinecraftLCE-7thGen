@@ -55,6 +55,17 @@
 #include "PSVitaStubs.h"
 #include "PSVitaMaths.h"
 #else
+#elif defined(__ANDROID__)
+#include <stdio.h>
+#include <stdlib.h>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
+#include <string>
+#include <memory>
+#include <GLES3/gl3.h>
+#include "AndroidTypes.h"
+#include "AndroidMaths.h"
 #define AUTO_VAR(_var, _val) auto _var = _val
 #include <unordered_map>
 #include <unordered_set>
