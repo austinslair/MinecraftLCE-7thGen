@@ -19,8 +19,8 @@ public final class MainActivity extends Activity {
         setContentView(new TouchSurface());
     }
 
-    private static final class TouchSurface extends View {
-        TouchSurface() { super(null); }
+    private final class TouchSurface extends View {
+        TouchSurface() { super(MainActivity.this); setFocusable(true); }
         @Override public boolean onTouchEvent(MotionEvent event) {
             NativeBridge.touch(event.getActionMasked(), event.getPointerId(event.getActionIndex()), event.getX(), event.getY());
             return true;
