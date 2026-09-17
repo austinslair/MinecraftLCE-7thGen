@@ -4,6 +4,19 @@
 //
 #pragma once
 
+#if defined(__ANDROID__) || defined(ANDROID)
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
+#include <string>
+#include <memory>
+#include "../Minecraft.Client/AndroidTypes.h"
+#include "../Minecraft.Client/AndroidMaths.h"
+#endif
+
 #ifdef __PS3__
 #else
 #define AUTO_VAR(_var, _val) auto _var = _val
