@@ -21,6 +21,8 @@ public final class MainActivity extends Activity {
 
         glView = new GLSurfaceView(this);
         glView.setEGLContextClientVersion(3);
+        glView.setEGLConfigChooser(8, 8, 8, 8, 16, 0);
+glView.setPreserveEGLContextOnPause(true);
         glView.setRenderer(new MinecraftRenderer());
         glView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
 
