@@ -6,6 +6,7 @@ set(REPO_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../../../../..)
 add_library(minecraft_android SHARED
     native_bridge.cpp
     android_input.cpp
+    ${REPO_ROOT}/Minecraft.World/AABB.cpp
 )
 
 target_compile_features(minecraft_android PRIVATE cxx_std_17)
