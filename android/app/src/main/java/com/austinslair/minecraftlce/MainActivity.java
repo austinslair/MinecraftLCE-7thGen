@@ -1,41 +1,82 @@
 package com.austinslair.minecraftlce;
 
 import android.app.Activity;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.widget.FrameLayout;
 
 public final class MainActivity extends Activity {
-    static { System.loadLibrary("minecraft_android"); }
+    private GLSurfaceView glView;
 
     @Override protected void onCreate(Bundle state) {
         super.onCreate(state);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(new TouchSurface());
+
+        glView = new GLSurfaceView(this);
+        glView.setEGLContextClientVersion(3);
+        glView.setRenderer(new MinecraftRenderer());
+        glView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+
+        FrameLayout root = new FrameLayout(this);
+        root.addView(glView, new FrameLayout.LayoutParams(-1, -1));
+        root.addView(new TouchOverlay(), new FrameLayout.LayoutParams(-1, -1));
+        setContentView(root);
     }
 
-    private final class TouchSurface extends View {
-        TouchSurface() { super(MainActivity.this); setFocusable(true); }
+    @Override protected void onResume() {
+        super.onResume();
+        if (glView != null) glView.onResume();
+    }
+
+    @Override protected void onPause() {
+        if (glView != null) glView.onPause();
+        super.onPause();
+    }
+
+    private final class TouchOverlay extends View {
+        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        TouchOverlay() {
+            super(MainActivity.this);
+            setFocusable(false);
+        }
+
         @Override public boolean onTouchEvent(MotionEvent event) {
-            NativeBridge.touch(event.getActionMasked(), event.getPointerId(event.getActionIndex()), event.getX(), event.getY());
+            final int index = event.getActionIndex();
+            NativeBridge.touch(
+                event.getActionMasked(),
+                event.getPointerId(index),
+                event.getX(index),
+                event.getY(index));
             return true;
         }
+
         @Override protected void onDraw(Canvas canvas) {
-            Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
-            p.setColor(0xFF101010);
-            canvas.drawRect(0, 0, getWidth(), getHeight(), p);
-            p.setColor(0x99FFFFFF); p.setStyle(Paint.Style.STROKE); p.setStrokeWidth(4);
-            float r = Math.min(getWidth(), getHeight()) * .09f;
-            canvas.drawCircle(getWidth() * .14f, getHeight() * .76f, r, p);
-            canvas.drawCircle(getWidth() * .86f, getHeight() * .76f, r, p);
-            p.setStyle(Paint.Style.FILL); p.setTextSize(Math.max(28, getHeight() * .035f));
-            canvas.drawText("JUMP", getWidth() * .80f, getHeight() * .62f, p);
-            canvas.drawText("USE", getWidth() * .90f, getHeight() * .76f, p);
+            super.onDraw(canvas);
+            float w = getWidth();
+            float h = getHeight();
+            float radius = Math.min(w, h) * 0.075f;
+
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setStrokeWidth(Math.max(3f, radius * 0.08f));
+            paint.setColor(0x99FFFFFF);
+
+            canvas.drawCircle(w * 0.14f, h * 0.78f, radius, paint);
+            canvas.drawCircle(w * 0.14f, h * 0.78f, radius * 0.35f, paint);
+            canvas.drawCircle(w * 0.86f, h * 0.78f, radius, paint);
+
+            paint.setStyle(Paint.Style.FILL);
+            paint.setTextSize(Math.max(24f, h * 0.032f));
+            canvas.drawText("JUMP", w * 0.79f, h * 0.61f, paint);
+            canvas.drawText("USE", w * 0.885f, h * 0.78f, paint);
+            canvas.drawText("MENU", w * 0.47f, h * 0.10f, paint);
         }
     }
 }
