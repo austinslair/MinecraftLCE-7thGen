@@ -47,7 +47,7 @@ public:
 		return wstring( buf );
 	}
 
-    void print(char *prefix, wostream out)
+    void print(char *prefix, wostream &out)
 	{
         Tag::print(prefix, out);
 
