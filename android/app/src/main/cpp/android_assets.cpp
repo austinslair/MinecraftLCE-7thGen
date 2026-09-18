@@ -37,3 +37,11 @@ bool is_initialized() {
 }
 
 } // namespace android_assets
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_austinslair_minecraftlce_NativeBridge_initPlatform(
+    JNIEnv* env,
+    jclass,
+    jobject assetManager) {
+    android_assets::initialize(env, assetManager);
+}
