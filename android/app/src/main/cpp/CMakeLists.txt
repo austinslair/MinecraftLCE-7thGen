@@ -52,18 +52,11 @@ target_include_directories(minecraft_android PRIVATE
     ${REPO_ROOT}/Minecraft.Client
 )
 
-# Compile the real startup/render/menu translation units as an object-only
-# probe. They are intentionally not linked into minecraft_android yet: CI can
-# expose Android portability gaps without making the currently working APK
-# depend on the rest of the client link closure.
+# Compile Minecraft.cpp as an object-only probe before the APK link. Keeping
+# one translation unit here makes each CI failure attributable to the real
+# startup source rather than to a batch of unrelated renderer/UI files.
 add_library(minecraft_client_startup_probe OBJECT
     ${REPO_ROOT}/Minecraft.Client/Minecraft.cpp
-    ${REPO_ROOT}/Minecraft.Client/Frustum.cpp
-    ${REPO_ROOT}/Minecraft.Client/FrustumCuller.cpp
-    ${REPO_ROOT}/Minecraft.Client/TitleScreen.cpp
-    ${REPO_ROOT}/Minecraft.Client/Screen.cpp
-    ${REPO_ROOT}/Minecraft.Client/GameRenderer.cpp
-    ${REPO_ROOT}/Minecraft.Client/LevelRenderer.cpp
 )
 target_compile_features(minecraft_client_startup_probe PRIVATE cxx_std_17)
 target_compile_options(minecraft_client_startup_probe PRIVATE
@@ -83,7 +76,7 @@ target_include_directories(minecraft_client_startup_probe PRIVATE
 
 # Gradle asks Ninja to build minecraft_android directly. Keep the startup probe
 # out of the link, but make it a dependency so every APK CI build really
-# compiles these original client translation units first.
+# compiles the original startup translation unit first.
 add_dependencies(minecraft_android minecraft_client_startup_probe)
 
 find_library(log-lib log)
