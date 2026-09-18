@@ -22,6 +22,7 @@ add_library(minecraft_android SHARED
     # Android platform dependencies are implemented.
     ${REPO_ROOT}/Minecraft.Client/AllowAllCuller.cpp
     ${REPO_ROOT}/Minecraft.Client/Timer.cpp
+    ${REPO_ROOT}/Minecraft.Client/FrustumData.cpp
 
     ${REPO_ROOT}/Minecraft.World/AABB.cpp
     ${REPO_ROOT}/Minecraft.World/Vec3.cpp
