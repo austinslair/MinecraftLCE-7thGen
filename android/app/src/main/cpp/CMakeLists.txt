@@ -61,6 +61,9 @@ add_library(minecraft_client_startup_probe OBJECT
     ${REPO_ROOT}/Minecraft.Client/Frustum.cpp
     ${REPO_ROOT}/Minecraft.Client/FrustumCuller.cpp
     ${REPO_ROOT}/Minecraft.Client/TitleScreen.cpp
+    ${REPO_ROOT}/Minecraft.Client/Screen.cpp
+    ${REPO_ROOT}/Minecraft.Client/GameRenderer.cpp
+    ${REPO_ROOT}/Minecraft.Client/LevelRenderer.cpp
 )
 target_compile_features(minecraft_client_startup_probe PRIVATE cxx_std_17)
 target_compile_options(minecraft_client_startup_probe PRIVATE
