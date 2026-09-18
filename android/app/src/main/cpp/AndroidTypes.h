@@ -13,6 +13,7 @@ typedef int32_t   BOOL;
 typedef int32_t   LONG;
 typedef int64_t   LONGLONG;
 typedef uint64_t  ULONGLONG;
+typedef int64_t   __int64;
 typedef uint64_t  __uint64;
 typedef float     FLOAT;
 typedef void*     HANDLE;
@@ -21,6 +22,11 @@ typedef const void* LPCVOID;
 typedef const char*    LPCSTR;
 typedef const wchar_t* LPCWSTR;
 typedef int32_t   HRESULT;
+
+typedef uint64_t  XUID;
+typedef uint64_t  PlayerUID;
+typedef uint64_t  SessionID;
+typedef uint64_t  GameSessionUID;
 
 #define S_OK      ((HRESULT)0L)
 #define S_FALSE   ((HRESULT)1L)
