@@ -1,8 +1,9 @@
 #pragma once
-
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
+#include <string>
+#include <memory>
 
 typedef uint8_t   BYTE;
 typedef uint16_t  WORD;
@@ -16,10 +17,11 @@ typedef uint64_t  __uint64;
 typedef float     FLOAT;
 typedef void*     HANDLE;
 typedef void*     LPVOID;
+typedef const void* LPCVOID;
 typedef const char*    LPCSTR;
 typedef const wchar_t* LPCWSTR;
-
 typedef int32_t   HRESULT;
+
 #define S_OK      ((HRESULT)0L)
 #define S_FALSE   ((HRESULT)1L)
 #define E_FAIL    ((HRESULT)0x80004005L)
@@ -30,8 +32,17 @@ typedef int32_t   HRESULT;
 #ifndef TRUE
 #define TRUE 1
 #endif
+
 #ifndef FALSE
 #define FALSE 0
 #endif
 
 #define AUTO_VAR(_var, _val) auto _var = _val
+
+using std::string;
+using std::wstring;
+using std::shared_ptr;
+using std::weak_ptr;
+using std::make_shared;
+
+class Entity;
