@@ -21,6 +21,7 @@ target_compile_options(minecraft_android PRIVATE
 target_include_directories(minecraft_android PRIVATE 
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${REPO_ROOT}/Minecraft.World
+    ${REPO_ROOT}/Minecraft.World/x64headers
     ${REPO_ROOT}/Minecraft.Client
 )
 
