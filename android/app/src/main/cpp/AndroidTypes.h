@@ -18,8 +18,17 @@ typedef int32_t   BOOL;
 typedef int32_t   LONG;
 typedef int64_t   LONGLONG;
 typedef uint64_t  ULONGLONG;
+
+// Android builds use Clang with -fms-extensions so the original LCE sources
+// can keep Microsoft integer spellings such as __int64. Under that mode
+// __int64 is a language keyword and must not be typedef'd again.
+#if defined(__clang__)
+typedef unsigned __int64 __uint64;
+#else
 typedef int64_t   __int64;
 typedef uint64_t  __uint64;
+#endif
+
 typedef float     FLOAT;
 typedef void*     HANDLE;
 typedef void*     LPVOID;
