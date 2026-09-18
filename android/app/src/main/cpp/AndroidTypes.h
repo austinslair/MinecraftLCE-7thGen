@@ -79,3 +79,12 @@ using std::weak_ptr;
 using std::make_shared;
 
 class Entity;
+
+#ifndef WINAPI
+#define WINAPI
+#endif
+
+typedef uintptr_t ULONG_PTR;
+typedef uint32_t  ULONG;
+typedef intptr_t  LONG_PTR;
+typedef int32_t   INT;
