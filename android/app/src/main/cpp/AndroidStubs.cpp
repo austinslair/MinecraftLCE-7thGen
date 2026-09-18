@@ -103,3 +103,6 @@ HitResult::HitResult(shared_ptr<Entity> entity) {
 double HitResult::distanceTo(shared_ptr<Entity> e) {
     return 0.0;
 }
+
+
+extern "C" void MemSect(int) {}
