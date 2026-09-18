@@ -1,10 +1,14 @@
 #pragma once
+#define _HAS_STD_BYTE 0
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
+#include <cstring>
 #include <string>
 #include <memory>
+#include <iostream>
 
+#define byte unsigned char
 typedef uint8_t   BYTE;
 typedef uint16_t  WORD;
 typedef uint32_t  DWORD;
@@ -21,12 +25,16 @@ typedef void*     LPVOID;
 typedef const void* LPCVOID;
 typedef const char*    LPCSTR;
 typedef const wchar_t* LPCWSTR;
+typedef wchar_t   WCHAR;
 typedef int32_t   HRESULT;
 
 typedef uint64_t  XUID;
 typedef uint64_t  PlayerUID;
 typedef uint64_t  SessionID;
 typedef uint64_t  GameSessionUID;
+
+#define ZeroMemory(Destination,Length) memset((Destination),0,(Length))
+#define CopyMemory(Destination,Source,Length) memcpy((Destination),(Source),(Length))
 
 #define S_OK      ((HRESULT)0L)
 #define S_FALSE   ((HRESULT)1L)
@@ -47,6 +55,9 @@ typedef uint64_t  GameSessionUID;
 
 using std::string;
 using std::wstring;
+using std::ostream;
+using std::wostream;
+using std::endl;
 using std::shared_ptr;
 using std::weak_ptr;
 using std::make_shared;
