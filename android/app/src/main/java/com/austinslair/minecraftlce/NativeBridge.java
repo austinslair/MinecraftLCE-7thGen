@@ -14,5 +14,4 @@ public final class NativeBridge {
     public static native void surfaceCreated();
     public static native void surfaceChanged(int width, int height);
     public static native void renderFrame();
-    public static native void setScreen(int screenId); // 0 = Main Menu, 1 = Play/World
 }
