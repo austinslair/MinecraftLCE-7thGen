@@ -43,6 +43,9 @@
 // safely here without editing those client headers.
 #include "ArrayWithLength.h"
 
+// Biome.h expects the original PCH to supply eMinecraftColour.
+#include "Common/App_enums.h"
+
 #ifndef AUTO_VAR
 #define AUTO_VAR(_var, _val) auto _var = _val
 #endif
