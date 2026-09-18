@@ -9,6 +9,7 @@
 #include <iostream>
 
 #define byte unsigned char
+typedef void      VOID;
 typedef uint8_t   BYTE;
 typedef uint16_t  WORD;
 typedef uint32_t  DWORD;
@@ -27,6 +28,21 @@ typedef const char*    LPCSTR;
 typedef const wchar_t* LPCWSTR;
 typedef wchar_t   WCHAR;
 typedef int32_t   HRESULT;
+
+typedef union _LARGE_INTEGER {
+    struct {
+        DWORD LowPart;
+        LONG HighPart;
+    };
+    struct {
+        DWORD LowPart;
+        LONG HighPart;
+    } u;
+    LONGLONG QuadPart;
+} LARGE_INTEGER;
+
+typedef void* XMEMCOMPRESSION_CONTEXT;
+typedef void* XMEMDECOMPRESSION_CONTEXT;
 
 typedef uint64_t  XUID;
 typedef uint64_t  PlayerUID;
