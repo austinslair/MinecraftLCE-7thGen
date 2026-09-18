@@ -202,6 +202,7 @@ void MemSect(int sect);
 #include "../Minecraft.Client/Orbis/4JLibs/inc/4J_Input.h"
 #endif
 
+#if !defined(__ANDROID__)
 #include "../Minecraft.Client/Common/Network/GameNetworkManager.h"
 
 // #ifdef _XBOX
@@ -267,3 +268,5 @@ void MemSect(int sect);
 #include "../Minecraft.Client/Common/GameRules/ConsoleGameRulesConstants.h"
 #include "../Minecraft.Client/Common/GameRules/ConsoleGameRules.h"
 #include "../Minecraft.Client/Common/Telemetry/TelemetryManager.h"
+
+#endif // !defined(__ANDROID__)
