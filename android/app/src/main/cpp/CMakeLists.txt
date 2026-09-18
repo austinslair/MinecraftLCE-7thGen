@@ -52,6 +52,29 @@ target_include_directories(minecraft_android PRIVATE
     ${REPO_ROOT}/Minecraft.Client
 )
 
+# Compile the real Minecraft startup translation unit as an object-only probe.
+# It is intentionally not linked into minecraft_android yet: this lets CI
+# expose missing Android platform/header dependencies without breaking the
+# currently working APK on unresolved runtime symbols.
+add_library(minecraft_client_startup_probe OBJECT
+    ${REPO_ROOT}/Minecraft.Client/Minecraft.cpp
+)
+target_compile_features(minecraft_client_startup_probe PRIVATE cxx_std_17)
+target_compile_options(minecraft_client_startup_probe PRIVATE
+    -Wno-delete-non-virtual-dtor
+    -Wno-mismatched-new-delete
+    -fms-extensions
+    -ivfsoverlay
+    ${ANDROID_CLIENT_VFS_OVERLAY}
+)
+target_include_directories(minecraft_client_startup_probe PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/client_compat
+    ${REPO_ROOT}/Minecraft.World
+    ${REPO_ROOT}/Minecraft.World/x64headers
+    ${REPO_ROOT}/Minecraft.Client
+)
+
 find_library(log-lib log)
 find_library(gles-lib GLESv3)
 find_library(android-lib android)
