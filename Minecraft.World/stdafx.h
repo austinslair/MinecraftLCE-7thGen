@@ -13,8 +13,15 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <algorithm>
 #include "AndroidTypes.h"
 #include "AndroidMaths.h"
+#include "AndroidStubs.h"
+
+using std::shared_ptr;
+using std::weak_ptr;
+using std::make_shared;
+class Entity;
 #endif
 
 #ifdef __PS3__
