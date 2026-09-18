@@ -81,6 +81,11 @@ target_include_directories(minecraft_client_startup_probe PRIVATE
     ${REPO_ROOT}/Minecraft.Client
 )
 
+# Gradle asks Ninja to build minecraft_android directly. Keep the startup probe
+# out of the link, but make it a dependency so every APK CI build really
+# compiles these original client translation units first.
+add_dependencies(minecraft_android minecraft_client_startup_probe)
+
 find_library(log-lib log)
 find_library(gles-lib GLESv3)
 find_library(android-lib android)
