@@ -32,6 +32,11 @@
 #include "AndroidStubs.h"
 #include "sal.h"
 
+// Shared declarations that the original client/world precompiled headers
+// provide before entity headers. Keep using the original LCE definitions
+// instead of duplicating enums or class metadata in the Android layer.
+#include "Class.h"
+
 // Many original Minecraft.Client headers rely on the precompiled header to
 // provide the shared array typedefs (floatArray, byteArray, etc.). The Android
 // System.h remap breaks the original include cycle, so this can be included
