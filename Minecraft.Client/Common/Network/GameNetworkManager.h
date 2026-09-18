@@ -2,7 +2,7 @@
 using namespace std;
 #include <vector>
 #include <qnet.h>
-#include "..\..\..\Minecraft.World\C4JThread.h"
+#include "C4JThread.h"
 #include "NetworkPlayerInterface.h"
 #ifdef _XBOX
 #include "..\..\Xbox\Network\PlatformNetworkManagerXbox.h"
