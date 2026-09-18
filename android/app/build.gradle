@@ -1,20 +1,20 @@
 plugins {
-    id com.android.application
+    id 'com.android.application'
 }
 
 android {
-    namespace com.austinslair.minecraftlce
+    namespace 'com.austinslair.minecraftlce'
     compileSdk 35
 
     defaultConfig {
-        applicationId com.austinslair.minecraftlce
+        applicationId 'com.austinslair.minecraftlce'
         minSdk 23
         targetSdk 35
         versionCode 1
-        versionName 0.1.0
+        versionName '0.1.0'
         externalNativeBuild {
             cmake {
-                cppFlags -std=c++17
+                cppFlags '-std=c++17'
             }
         }
     }
@@ -23,22 +23,22 @@ android {
         main {
             assets {
                 srcDirs = [
-                    src/main/assets,
-                    ../../Minecraft.Client/Common/res,
-                    ../../Minecraft.Client/Common/Media
+                    'src/main/assets',
+                    '../../Minecraft.Client/Common/res',
+                    '../../Minecraft.Client/Common/Media'
                 ]
             }
         }
     }
 
     aaptOptions {
-        noCompress png, ttf, swf, arc, pck, loc
+        noCompress 'png', 'ttf', 'swf', 'arc', 'pck', 'loc'
     }
 
     externalNativeBuild {
         cmake {
-            path src/main/cpp/CMakeLists.txt
-            version 3.22.1
+            path 'src/main/cpp/CMakeLists.txt'
+            version '3.22.1'
         }
     }
 }
