@@ -3,14 +3,14 @@ project(minecraft_android)
 
 get_filename_component(REPO_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../../../.." ABSOLUTE)
 
-# Minecraft.Client sources include their platform PCH with a quoted include,
-# which normally resolves to Minecraft.Client/stdafx.h. During the Android
-# port we remap that one file to a small Android compatibility PCH so the
-# original client translation units can be compiled without editing them.
+# Original client sources use platform-heavy shared headers. Remap only the
+# incompatible headers to Android compatibility equivalents so the original
+# translation units can remain untouched while the port is brought up.
 set(ANDROID_CLIENT_COMPAT_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/client_compat/stdafx.h")
+set(ANDROID_SYSTEM_COMPAT_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/client_compat/System.h")
 set(ANDROID_CLIENT_VFS_OVERLAY "${CMAKE_CURRENT_BINARY_DIR}/android-client-vfs.yaml")
 file(GENERATE OUTPUT "${ANDROID_CLIENT_VFS_OVERLAY}" CONTENT
-"{\n  \"version\": 0,\n  \"roots\": [\n    {\n      \"type\": \"file\",\n      \"name\": \"${REPO_ROOT}/Minecraft.Client/stdafx.h\",\n      \"external-contents\": \"${ANDROID_CLIENT_COMPAT_HEADER}\"\n    }\n  ]\n}\n")
+"{\n  \"version\": 0,\n  \"roots\": [\n    {\n      \"type\": \"file\",\n      \"name\": \"${REPO_ROOT}/Minecraft.Client/stdafx.h\",\n      \"external-contents\": \"${ANDROID_CLIENT_COMPAT_HEADER}\"\n    },\n    {\n      \"type\": \"file\",\n      \"name\": \"${REPO_ROOT}/Minecraft.World/System.h\",\n      \"external-contents\": \"${ANDROID_SYSTEM_COMPAT_HEADER}\"\n    }\n  ]\n}\n")
 
 add_library(minecraft_android SHARED
     native_bridge.cpp
@@ -45,6 +45,7 @@ target_compile_options(minecraft_android PRIVATE
 
 target_include_directories(minecraft_android PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/client_compat
     ${REPO_ROOT}/Minecraft.World
     ${REPO_ROOT}/Minecraft.World/x64headers
     ${REPO_ROOT}/Minecraft.Client
