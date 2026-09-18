@@ -27,3 +27,7 @@ BOOL TlsSetValue(DWORD dwTlsIndex, LPVOID lpTlsValue);
 void Sleep(DWORD dwMilliseconds);
 BOOL CloseHandle(HANDLE hObject);
 DWORD WaitForSingleObject(HANDLE hHandle, DWORD dwMilliseconds);
+
+BOOL QueryPerformanceCounter(LARGE_INTEGER *lpPerformanceCount);
+BOOL QueryPerformanceFrequency(LARGE_INTEGER *lpFrequency);
+void MemSect(int);
