@@ -10,6 +10,9 @@ add_library(minecraft_android SHARED
     ${REPO_ROOT}/Minecraft.World/AABB.cpp
     ${REPO_ROOT}/Minecraft.World/Vec3.cpp
     ${REPO_ROOT}/Minecraft.World/IntCache.cpp
+    ${REPO_ROOT}/Minecraft.World/Mth.cpp
+    ${REPO_ROOT}/Minecraft.World/Random.cpp
+    ${REPO_ROOT}/Minecraft.World/ImprovedNoise.cpp
     ${REPO_ROOT}/Minecraft.World/PerlinNoise.cpp
     ${REPO_ROOT}/Minecraft.World/SimplexNoise.cpp
     ${REPO_ROOT}/Minecraft.World/Facing.cpp
