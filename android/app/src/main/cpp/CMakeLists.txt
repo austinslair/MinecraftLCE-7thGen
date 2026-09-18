@@ -52,12 +52,15 @@ target_include_directories(minecraft_android PRIVATE
     ${REPO_ROOT}/Minecraft.Client
 )
 
-# Compile the real Minecraft startup translation unit as an object-only probe.
-# It is intentionally not linked into minecraft_android yet: this lets CI
-# expose missing Android platform/header dependencies without breaking the
-# currently working APK on unresolved runtime symbols.
+# Compile the real startup/render/menu translation units as an object-only
+# probe. They are intentionally not linked into minecraft_android yet: CI can
+# expose Android portability gaps without making the currently working APK
+# depend on the rest of the client link closure.
 add_library(minecraft_client_startup_probe OBJECT
     ${REPO_ROOT}/Minecraft.Client/Minecraft.cpp
+    ${REPO_ROOT}/Minecraft.Client/Frustum.cpp
+    ${REPO_ROOT}/Minecraft.Client/FrustumCuller.cpp
+    ${REPO_ROOT}/Minecraft.Client/TitleScreen.cpp
 )
 target_compile_features(minecraft_client_startup_probe PRIVATE cxx_std_17)
 target_compile_options(minecraft_client_startup_probe PRIVATE
