@@ -105,4 +105,17 @@ double HitResult::distanceTo(shared_ptr<Entity> e) {
 }
 
 
-extern "C" void MemSect(int) {}
+void MemSect(int) {}
+
+BOOL QueryPerformanceCounter(LARGE_INTEGER *lpPerformanceCount) {
+    if (!lpPerformanceCount) return FALSE;
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    lpPerformanceCount->QuadPart = (LONGLONG)ts.tv_sec * 1000000000LL + ts.tv_nsec;
+    return TRUE;
+}
+BOOL QueryPerformanceFrequency(LARGE_INTEGER *lpFrequency) {
+    if (!lpFrequency) return FALSE;
+    lpFrequency->QuadPart = 1000000000LL;
+    return TRUE;
+}
