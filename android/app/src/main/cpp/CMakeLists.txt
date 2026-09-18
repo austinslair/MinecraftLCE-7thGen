@@ -16,10 +16,12 @@ add_library(minecraft_android SHARED
     native_bridge.cpp
     android_input.cpp
     AndroidStubs.cpp
+    AndroidSystem.cpp
 
-    # First untouched Minecraft.Client compile probe. More client sources will
-    # be added incrementally as their platform dependencies are implemented.
+    # Untouched Minecraft.Client sources. Grow this list incrementally as
+    # Android platform dependencies are implemented.
     ${REPO_ROOT}/Minecraft.Client/AllowAllCuller.cpp
+    ${REPO_ROOT}/Minecraft.Client/Timer.cpp
 
     ${REPO_ROOT}/Minecraft.World/AABB.cpp
     ${REPO_ROOT}/Minecraft.World/Vec3.cpp
