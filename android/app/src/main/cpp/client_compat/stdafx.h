@@ -32,6 +32,12 @@
 #include "AndroidStubs.h"
 #include "sal.h"
 
+// Many original Minecraft.Client headers rely on the precompiled header to
+// provide the shared array typedefs (floatArray, byteArray, etc.). The Android
+// System.h remap breaks the original include cycle, so this can be included
+// safely here without editing those client headers.
+#include "ArrayWithLength.h"
+
 #ifndef AUTO_VAR
 #define AUTO_VAR(_var, _val) auto _var = _val
 #endif
