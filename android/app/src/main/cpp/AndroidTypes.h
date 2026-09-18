@@ -58,6 +58,12 @@ typedef uint64_t  PlayerUID;
 typedef uint64_t  SessionID;
 typedef uint64_t  GameSessionUID;
 
+// XInput exposes four local user slots. Preserve that platform contract so
+// original client structures keep their expected layout on Android.
+#ifndef XUSER_MAX_COUNT
+#define XUSER_MAX_COUNT 4
+#endif
+
 #define ZeroMemory(Destination,Length) memset((Destination),0,(Length))
 #define CopyMemory(Destination,Source,Length) memcpy((Destination),(Source),(Length))
 
