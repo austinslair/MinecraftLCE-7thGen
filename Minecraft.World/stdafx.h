@@ -136,10 +136,10 @@ typedef XUID GameSessionUID;
 #include <assert.h>
 #endif
 
-#ifndef _XBOX
-#include "extraX64.h"
-#else
+#if defined(_XBOX)
 #include "..\Minecraft.Client\xbox\network\extra.h"
+#elif defined(_WINDOWS64)
+#include "extraX64.h"
 #endif
 
 #include "Definitions.h"
