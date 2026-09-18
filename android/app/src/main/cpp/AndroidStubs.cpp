@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "AndroidStubs.h"
 #include "HitResult.h"
 #include <vector>
