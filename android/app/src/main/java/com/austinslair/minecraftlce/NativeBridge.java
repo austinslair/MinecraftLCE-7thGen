@@ -9,7 +9,7 @@ public final class NativeBridge {
 
     private NativeBridge() {}
 
-    public static native void initAssets(AssetManager assetManager);
+    public static native void initPlatform(AssetManager assetManager);
     public static native void touch(int action, int pointerId, float x, float y);
     public static native void surfaceCreated();
     public static native void surfaceChanged(int width, int height);
