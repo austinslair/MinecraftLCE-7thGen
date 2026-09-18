@@ -20,7 +20,7 @@ public final class MainActivity extends Activity {
         );
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        NativeBridge.initAssets(getAssets());
+        NativeBridge.initPlatform(getAssets());
 
         glView = new GLSurfaceView(this);
         glView.setEGLContextClientVersion(3);
