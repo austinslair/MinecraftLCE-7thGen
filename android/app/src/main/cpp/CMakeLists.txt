@@ -63,6 +63,8 @@ target_compile_options(minecraft_client_startup_probe PRIVATE
     -Wno-delete-non-virtual-dtor
     -Wno-mismatched-new-delete
     -fms-extensions
+    -ferror-limit=1
+    -fdiagnostics-color=never
     -ivfsoverlay
     ${ANDROID_CLIENT_VFS_OVERLAY}
 )
