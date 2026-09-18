@@ -7,6 +7,7 @@ add_library(minecraft_android SHARED
     native_bridge.cpp
     android_input.cpp
     AndroidStubs.cpp
+    Android4JRender.cpp
     ${REPO_ROOT}/Minecraft.World/AABB.cpp
     ${REPO_ROOT}/Minecraft.World/Vec3.cpp
     ${REPO_ROOT}/Minecraft.World/IntCache.cpp
@@ -24,11 +25,12 @@ target_compile_options(minecraft_android PRIVATE
     -Wno-mismatched-new-delete
 )
 
-target_include_directories(minecraft_android PRIVATE 
+target_include_directories(minecraft_android PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${REPO_ROOT}/Minecraft.World
     ${REPO_ROOT}/Minecraft.World/x64headers
     ${REPO_ROOT}/Minecraft.Client
+    ${REPO_ROOT}/Minecraft.Client/Android/4JLibs/inc
 )
 
 find_library(log-lib log)
