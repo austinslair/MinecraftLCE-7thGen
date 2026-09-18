@@ -372,3 +372,15 @@ Java_com_austinslair_minecraftlce_NativeBridge_renderFrame(JNIEnv*, jclass) {
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
 }
+
+static int g_currentScreen = 0; // 0 = Main Menu, 1 = In Game
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_austinslair_minecraftlce_NativeBridge_initAssets(JNIEnv*, jclass, jobject) {
+    __android_log_print(ANDROID_LOG_INFO, "MinecraftLCE", "Native assets initialized");
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_com_austinslair_minecraftlce_NativeBridge_setScreen(JNIEnv*, jclass, jint screenId) {
+    g_currentScreen = screenId;
+}
